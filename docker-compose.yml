@@ -1,0 +1,48 @@
+version: '2'
+services:
+  data:
+    image: "busybox"
+    volumes:
+      - db:/var/lib/mysql
+      - node_modules:/app/node_modules
+      - public:/app/public
+
+  app: &app_base
+    build:
+      context: .
+      dockerfile: "Dockerfile"
+    command: ["npm", "run", "start", "server"]
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+    volumes_from:
+      - data
+    ports:
+      - "3000:3000"
+    dns: 8.8.8.8
+    tty: true
+    stdin_open: true
+
+  db:
+    image: mysql:5.6
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    volumes_from:
+      - data
+    ports:
+      - "3306:3306"
+
+volumes:
+  db:
+    driver: local
+  bundle:
+    driver: local
+  app-gems:
+    driver: local
+  public:
+    driver: local
+  node_modules:
+    driver: local
