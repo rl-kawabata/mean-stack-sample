@@ -1,4 +1,4 @@
-# mean-stack-sample
+# mean-stack-sample ※作業途中
 
 ---
 
