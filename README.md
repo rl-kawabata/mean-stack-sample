@@ -2,20 +2,20 @@
 
 ---
 
-### 構成
+## 構成
 
 
-#### Dockerコマンド
+## 起動
 ```
 docker-compose up --build
 ```
 
-#### コンテナログイン（バッチとかジェネレータとかはここから）
+## コンテナログイン
 ```
-docker exec -it meanstacksample_app bash
+docker exec -it {container id} bash
 ```
 
-#### コンテナアタッチ（開発のログを監視）
+## コンテナアタッチ
 ```
-docker attach meanstacksample_app
+docker attach {container id}
 ```
